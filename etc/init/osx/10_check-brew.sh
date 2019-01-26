@@ -2,7 +2,7 @@
 
 set -Ceu
 
-. "$DOTPATH"/etc/lib/vital.sh
+. "$LATEXPATH"/etc/lib/vital.sh
 
 if ! is_osx; then
     echo "error: this script is only supported with osx."

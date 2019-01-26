@@ -1,36 +1,36 @@
-DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
+LATEXPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*)
 EXCLUSIONS := .DS_Store .git .gitignore .gitmodules
-DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+LATEXFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
 
 list: ## Show dot files in this repo
-	@$(foreach val, $(DOTFILES), ls -dF $(val);)
+	@$(foreach val, $(LATEXFILES), ls -dF $(val);)
 
 deploy: ## Create symlink to home directory
-	@echo 'Start to deploy dotfiles to home directory.'
+	@echo 'Start to deploy LATEXFILES to home directory.'
 	@echo ''
-	@$(foreach file, $(DOTFILES), ln -sfnv $(abspath $(file)) $(HOME)/$(file);)
+	@$(foreach file, $(LATEXFILES), ln -sfnv $(abspath $(file)) $(HOME)/$(file);)
 
 update: ## Fetch changes for this repo
 	git pull origin master
 
 init: ## Setup environment settings
-	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
+	@LATEXPATH=$(LATEXPATH) bash $(LATEXPATH)/etc/init/init.sh
 
 install: update deploy init ## Run make updte, deploy, init
 	@exec $$SHELL
 
-# test: ## Test dotfiles and init scripts
-# 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/test/test.sh
+# test: ## Test LATEXFILES and init scripts
+# 	@LATEXPATH=$(LATEXPATH) bash $(LATEXPATH)/etc/test/test.sh
 
 clean: ## Remove the dot files and this repo
 	@read -n 1 -p 'Are you sure? [yN]: ' ans; echo; \
 			case "$$ans" in 'y') \
 				echo 'Remove dot files in your home directory...'; \
-				-$(foreach file, $(DOTFILES), rm -vrf $(HOME)/$(file);); \
-				-rm -rf $(DOTPATH);; \
+				-$(foreach file, $(LATEXFILES), rm -vrf $(HOME)/$(file);); \
+				-rm -rf $(LATEXPATH);; \
 			esac
 
 

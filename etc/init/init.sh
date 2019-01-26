@@ -3,14 +3,14 @@
 
 set -Ceu
 
-. "$DOTPATH"/etc/lib/vital.sh
+. "$LATEXPATH"/etc/lib/vital.sh
 
-if [ -z "$DOTPATH" ]; then
-    echo '$DOTPATH not set' >&2
+if [ -z "$LATEXPATH" ]; then
+    echo '$LATEXPATH not set' >&2
     exit 1
 fi
 
-for script in "$DOTPATH"/etc/init/$(get_os)/*.sh
+for script in "$LATEXPATH"/etc/init/$(get_os)/*.sh
 do
     if [ -f "$script" ]; then
         echo '-> $(basename $script)'
