@@ -1,1 +1,1 @@
-/home/d_salt/sandbox/latex/etc/install
+../install
