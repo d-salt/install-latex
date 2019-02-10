@@ -60,6 +60,8 @@ has() {
     is_exists "$@"
 }
 
+LATEXPATH="${HOME}/latex"; export LATEXPATH
+LATEX_GITHUB="https://github.com/d-salt/install-latex.git"; export LATEX_GITHUB
 
 latex_download() {
     if [ -d "$LATEXPATH" ]; then
