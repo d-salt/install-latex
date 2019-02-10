@@ -13,7 +13,7 @@ fi
 for script in "$LATEXPATH"/etc/init/$(get_os)/*.sh
 do
     if [ -f "$script" ]; then
-        echo '-> $(basename $script)'
+        echo "-> $(basename $script)"
         bash $script
     else
         continue

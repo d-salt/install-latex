@@ -7,7 +7,7 @@ set -Cue
 : "Install LaTeX and packages"  && {
     echo 'Download TeX Live...' 
     if is_exists "curl"; then
-      curl http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+      curl -L http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
     elif is_exists "wget"; then
       wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
     else
