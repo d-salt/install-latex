@@ -48,7 +48,7 @@ latex_install() {
 }
 
 
-dotfiles_install "$@"
+latex_install "$@"
 
 # Restart shell if specified "bash -c $(curl -L {URL})"
 # not restart:
