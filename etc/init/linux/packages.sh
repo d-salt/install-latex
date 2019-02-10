@@ -2,6 +2,8 @@
 
 set -Cue
 
+. "$LATEXPATH"/etc/lib/vital.sh
+
 : "Install LaTeX and packages"  && {
     echo 'Download TeX Live...' 
     if is_exists "curl"; then
