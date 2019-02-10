@@ -1,0 +1,62 @@
+. "$LATEXPATH"/etc/lib/vital.sh
+
+latex_download() {
+    if [ -d "$LATEXPATH" ]; then
+        echo "error: $LATEXPATH: already exists"
+        exit 1
+    fi
+
+    if is_exists "git"; then
+        git clone "$LATEX_GITHUB" "$LATEXPATH"
+    else
+        echo "error: require: git"
+    fi
+    echo "Success Download"
+}
+
+latex_deploy() {
+    echo "Deploying latex..."
+
+    if [ ! -d $LATEXPATH ]; then
+        echo "error: $LATEXPATH: not found"
+        exit 1
+    fi
+
+    cd "$LATEXPATH"
+    make deploy
+    echo "Success Deploy"
+}
+
+latex_initialize() {
+    if [ "$1" = "init" ]; then
+        echo "Initializing latex..."
+
+    if [ -f Makefile ]; then
+        make init
+    else
+        echo "error: Makefile: not found"
+        exit 1
+    fi
+    echo "Success Initialize"
+}
+
+# A script for the file named "install"
+latex_install() {
+    latex_download &&
+    latex_deploy &&
+    latex_initialize "$@"
+}
+
+
+dotfiles_install "$@"
+
+# Restart shell if specified "bash -c $(curl -L {URL})"
+# not restart:
+#   curl -L {URL} | bash
+if [ -p /dev/stdin ]; then
+    echo "Now continue with Rebooting your shell"
+else
+    echo "Restarting your shell..."
+    exec "${SHELL}"
+fi
+
