@@ -4,6 +4,14 @@ set -Cue
 
 . "$LATEXPATH"/etc/lib/vital.sh
 
+: "Check pre-requirements" && {
+    echo 'Checking pre-requirements...'
+    if ! is_exists "perl"; then
+      echo "Error: require: perl"
+      exit 1
+    fi
+}
+
 : "Install LaTeX and packages"  && {
     echo 'Download TeX Live...' 
     if is_exists "curl"; then
