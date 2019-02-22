@@ -12,6 +12,7 @@ set -Cue
     fi
 }
 
+
 : "Install LaTeX and packages"  && {
     echo 'Download TeX Live...' 
     if is_exists "curl"; then
@@ -22,10 +23,9 @@ set -Cue
       echo "error: required: curl or wget"
       exit 1
     fi
-    tar xvf install-tl-unx.tar.gz
-    rm install-tl-unx.tar.gz
+    tar -C install-tl-unx --strip-components=1 xvf install-tl-unx.tar.gz
     echo 'Install TeX Live and packages...' 
-    cd install-tl*
+    cd install-tl-unx
     sudo ./install-tl --repository http://mirror.ctan.org/systems/texlive/tlnet/
     ln -snvf /usr/local/texlive/????/bin/*/tlmgr /usr/local/
     
@@ -45,4 +45,3 @@ set -Cue
 }
 
 exit 0
-
