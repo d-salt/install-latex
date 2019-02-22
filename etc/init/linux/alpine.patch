@@ -1,0 +1,14 @@
+diff --git a/etc/init/linux/packages.sh b/etc/init/linux/packages.sh
+index 4e96f95..290874f 100644
+--- a/etc/init/linux/packages.sh
++++ b/etc/init/linux/packages.sh
+@@ -26,7 +26,8 @@ set -Cue
+     tar -C install-tl-unx --strip-components=1 xvf install-tl-unx.tar.gz
+     echo 'Install TeX Live and packages...' 
+     cd install-tl-unx
+-    sudo ./install-tl --repository http://mirror.ctan.org/systems/texlive/tlnet/
++    echo "selected_scheme scheme-basic \noption_doc 0 \noption_src 0" > texlive.profile
++    sudo ./install-tl --repository http://mirror.ctan.org/systems/texlive/tlnet/ --profile texlive.profile
+     ln -snvf /usr/local/texlive/????/bin/*/tlmgr /usr/local/
+     
+     sudo tlmgr update --self --all
