@@ -23,7 +23,8 @@ set -Cue
       echo "error: required: curl or wget"
       exit 1
     fi
-    tar -C install-tl-unx --strip-components=1 xvf install-tl-unx.tar.gz
+    mkdir install-tl-unx
+    tar xvf install-tl-unx.tar.gz -C ./install-tl-unx --strip-components=1
     echo 'Install TeX Live and packages...' 
     cd install-tl-unx
     sudo ./install-tl --repository http://mirror.ctan.org/systems/texlive/tlnet/
